@@ -6,12 +6,17 @@ function getIDPlot(id) {
 d3.json("../../samples.json").then((data) => {
   console.log(data)
 
-  var wfreq = data.metadata.map(d => d.wfreq)
-  console.log(`Washing Freq:`, wfreq);
+  
   
 // filter the data based on user's ID
+// var wfreq = data.metadata.map(d => d.wfreq)
+console.log(`Washing Freq:`, wfreq);
+
   var filteredSample = data.samples.filter(asdf => asdf.id.toString() === id)[0];
   console.log(filteredSample);
+
+  var wfreq = filteredSample.wfreq;
+  console.log(`Washing Freq:`, wfreq);
 
 // grap sample_value, otu_ids and otu_labele and then slice it 
   var sample_values = filteredSample["sample_values"].slice(0, 10).reverse();
@@ -48,7 +53,8 @@ var trace2 = {
               };
               var layout_2 = {
                   xaxis:{title: "OTU ID"},
-                  color: {colors: ['yellow', 'red']}
+                  color: {colors: ['green', 'blue']},
+                  colorscale: "Earth"
 
               };
               var data2 = [trace2];
@@ -101,41 +107,50 @@ function getInfo(id) {
 
       // select demographic panel to put data 
  
-var selDataSet = d3.select("#selDataset");
-var idNew = selDataSet.property("value");
-console.log(idNew)
+//var selDataSet = d3.select("#sample-metadatat");
+//var idNew = selDataSet.property("value");
+//console.log(idNew)
 
 
       // get the metadata info for the demographic panel
       var metadata = data.metadata;
 
-      console.log(metadata)
+      // console.log(metadata)
 
-      // // filter meta data info by id
-      var result = metadata.filter(meta => meta.id.toString() === id)[0];
-      var selectedID = result.id;
-      var selectedEtnicity = result.ethnicity;
-      var selectedGender = result.gender;
-      var selectedAge = result.age;
-      var selectedLocation = result.location;
-      var selectedBbtype = result.bbtype ;
-      var selectedFreq = result.wfreq;
+      // // // filter meta data info by id
+     var result = metadata.filter(meta => meta.id.toString() === id)[0];
+      // var selectedID = result.id;
+      // var selectedEtnicity = result.ethnicity;
+      // var selectedGender = result.gender;
+      // var selectedAge = result.age;
+      // var selectedLocation = result.location;
+      // var selectedBbtype = result.bbtype ;
+      // var selectedFreq = result.wfreq;
 
-      var dic = {
-        "id": selectedID, 
-        "ethnicity":selectedEtnicity,
-        "gender": selectedGender,
-        "age": selectedAge,
-        "location": selectedLocation,
-        "bbtype": selectedBbtype,
-        "wfreq":selectedFreq
-        };
-      console.log(dic);
+      // var dic = {
+      //   "id": selectedID, 
+      //   "ethnicity":selectedEtnicity,
+      //   "gender": selectedGender,
+      //   "age": selectedAge,
+      //   "location": selectedLocation,
+      //   "bbtype": selectedBbtype,
+      //   "wfreq":selectedFreq
+      //   };
+      // console.log(dic);
  
 // select demographic panel to put data
-var demographicInfo = d3.select("#sample-metadata");  
-var input =   demographicInfo.property ("value"); 
-d3.select("span").text(input);
+var demographicInfo = d3.select("#sample-metadata");
+demographicInfo.html("");
+Object.entries(result).forEach(([key,value]) =>{
+  demographicInfo.append('h5').text(`${key}: ${value}`);
+
+
+});
+
+
+
+//var input = demographicInfo.append("h6").text(`${dic}`); 
+//d3.select("span").text(input);
 
 
 
@@ -144,8 +159,17 @@ d3.select("span").text(input);
 
 }
 
+
+function optionChanged(id){
 getIDPlot(id);
-getInfo(id)
+getInfo(id);
+
+
+}
+
+
+
+
 
 
 
