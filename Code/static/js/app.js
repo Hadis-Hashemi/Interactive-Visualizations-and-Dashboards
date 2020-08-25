@@ -3,19 +3,19 @@
 id = "941";
 function getIDPlot(id) {
 // getting data from json file 
-d3.json("../../samples.json").then((data) => {
+d3.json("Code/samples.json").then((data) => {
   console.log(data)
 
   
   
 // filter the data based on user's ID
-// var wfreq = data.metadata.map(d => d.wfreq)
+var wfreq = data.metadata.map(d => d.wfreq)
 console.log(`Washing Freq:`, wfreq);
 
   var filteredSample = data.samples.filter(asdf => asdf.id.toString() === id)[0];
   console.log(filteredSample);
 
-  var wfreq = filteredSample.wfreq;
+  // var wfreq = filteredSample.wfreq;
   console.log(`Washing Freq:`, wfreq);
 
 // grap sample_value, otu_ids and otu_labele and then slice it 
@@ -102,14 +102,9 @@ Plotly.newPlot("gauge", data3, layout3);
 // create the function to get the necessary data
 function getInfo(id) {
   // read the json file to get data
-  d3.json("../../samples.json").then((data)=> {
+  d3.json("Code/samples.json").then((data)=> {
       
 
-      // select demographic panel to put data 
- 
-//var selDataSet = d3.select("#sample-metadatat");
-//var idNew = selDataSet.property("value");
-//console.log(idNew)
 
 
       // get the metadata info for the demographic panel
@@ -119,24 +114,7 @@ function getInfo(id) {
 
       // // // filter meta data info by id
      var result = metadata.filter(meta => meta.id.toString() === id)[0];
-      // var selectedID = result.id;
-      // var selectedEtnicity = result.ethnicity;
-      // var selectedGender = result.gender;
-      // var selectedAge = result.age;
-      // var selectedLocation = result.location;
-      // var selectedBbtype = result.bbtype ;
-      // var selectedFreq = result.wfreq;
-
-      // var dic = {
-      //   "id": selectedID, 
-      //   "ethnicity":selectedEtnicity,
-      //   "gender": selectedGender,
-      //   "age": selectedAge,
-      //   "location": selectedLocation,
-      //   "bbtype": selectedBbtype,
-      //   "wfreq":selectedFreq
-      //   };
-      // console.log(dic);
+     
  
 // select demographic panel to put data
 var demographicInfo = d3.select("#sample-metadata");
@@ -146,11 +124,6 @@ Object.entries(result).forEach(([key,value]) =>{
 
 
 });
-
-
-
-//var input = demographicInfo.append("h6").text(`${dic}`); 
-//d3.select("span").text(input);
 
 
 
@@ -176,26 +149,3 @@ getInfo(id);
 
 
 
-
-// button.on("click", runEnter);
-// form.on("submit",runEnter);
-
-// // Create the function to run for both events
-// function runEnter() {
-
-//   // Prevent the page from refreshing
-//   d3.event.preventDefault();
-
-//   // Select the input element and get the raw HTML node
-//   var inputElement = d3.select("#example-form-input");
-
-//   // Get the value property of the input element
-//   var inputValue = inputElement.property("value");
-
-//   // Print the value to the console
-//   console.log(inputValue);
-
-//   // Set the span tag in the h1 element to the text
-//   // that was entered in the form
-//   d3.select("h1>span").text(inputValue);
-// }
