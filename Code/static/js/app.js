@@ -9,14 +9,15 @@ d3.json("Code/samples.json").then((data) => {
   
   
 // filter the data based on user's ID
-var wfreq = data.metadata.map(d => d.wfreq)
-console.log(`Washing Freq:`, wfreq);
 
-  var filteredSample = data.samples.filter(asdf => asdf.id.toString() === id)[0];
+  var filteredSample = data.samples.filter(data => data.id.toString() === id)[0];
   console.log(filteredSample);
 
-  // var wfreq = filteredSample.wfreq;
+  var metadata = data.metadata.filter(data => data.id.toString() === id)[0];
+  console.log(metadata.wfreq);
+  var wfreq = metadata.wfreq;
   console.log(`Washing Freq:`, wfreq);
+
 
 // grap sample_value, otu_ids and otu_labele and then slice it 
   var sample_values = filteredSample["sample_values"].slice(0, 10).reverse();
@@ -91,6 +92,8 @@ var layout3 = { width: 600, height: 500
 
 };
 
+var gaugeElement = d3.select("#gauge");
+gaugeElement.html("");
 
 Plotly.newPlot("gauge", data3, layout3);
 
