@@ -1,5 +1,5 @@
 
-id = "941";
+// id = "941";
 function getIDPlot(id) {
 // getting data from json file 
 d3.json("Code/samples.json").then((data) => {
