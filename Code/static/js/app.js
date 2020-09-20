@@ -1,4 +1,3 @@
-// form.on("submit",getIDPlot);
 
 id = "941";
 function getIDPlot(id) {
@@ -7,7 +6,7 @@ d3.json("Code/samples.json").then((data) => {
   console.log(data)
 
   
-  
+
 // filter the data based on user's ID
 
   var filteredSample = data.samples.filter(data => data.id.toString() === id)[0];
