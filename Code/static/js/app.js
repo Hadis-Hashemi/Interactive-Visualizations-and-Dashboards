@@ -1,5 +1,4 @@
 
-// id = "941";
 function getIDPlot(id) {
 // getting data from json file 
 d3.json("Code/samples.json").then((data) => {
@@ -144,8 +143,6 @@ Object.entries(result).forEach(([key,value]) =>{
 function optionChanged(id){
 getIDPlot(id);
 getInfo(id);
-
-
 }
 
 
