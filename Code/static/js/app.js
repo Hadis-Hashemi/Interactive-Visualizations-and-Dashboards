@@ -63,9 +63,15 @@ var trace2 = {
 // create Basic Gauge
 var trace3 = 
 	{
-		domain: { x: [0, 1], y: [0, 1] },
+    type: "pie",
+    showlegend: false,
+    domain: { x: [0, 1], y: [0, 1] },
+    hole: .4,
+    rotation: 90,
 		value: parseFloat(wfreq),
-		title: { text: "Belly Button washing Frequency" },
+    title: { text: "Belly Button washing Frequency" },
+            text: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ""],
+
 		type: "indicator",
     mode: "gauge+number",
 
